@@ -1,12 +1,21 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Fish } from "lucide-react";
+import { Fish, Phone } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const Footer = () => {
+  const [showContact, setShowContact] = useState(false);
+
   return (
-    <footer className="bg-gray-900 text-white pt-16">
+    <footer className="bg-gray-900 text-white pt-16" id="footer">
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -69,34 +78,25 @@ const Footer = () => {
                 <a href="#recipes" className="text-gray-400 hover:text-white transition-colors">Resep</a>
               </li>
               <li>
-                <a href="#about" className="text-gray-400 hover:text-white transition-colors">Tentang Kami</a>
-              </li>
-              <li>
-                <a href="#contact" className="text-gray-400 hover:text-white transition-colors">Kontak</a>
+                <button 
+                  onClick={() => setShowContact(true)}
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <Phone className="w-4 h-4" /> Kontak
+                </button>
               </li>
             </ul>
           </div>
           
-          {/* Resources */}
+          {/* About Us */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Sumber Daya</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Praktik Berkelanjutan</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Peternak Mitra</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Informasi Gizi</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Panduan Memasak</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">FAQ</a>
-              </li>
-            </ul>
+            <h3 className="font-bold text-lg mb-4">Tentang Kami</h3>
+            <p className="text-gray-400 mb-4">
+              Aquaharvest didirikan pada tahun 2018 dengan misi untuk menghubungkan konsumen langsung dengan peternak ikan air tawar yang berkualitas.
+            </p>
+            <p className="text-gray-400">
+              Kami berkomitmen untuk mendorong praktik perikanan berkelanjutan dan menyediakan makanan laut berkualitas tertinggi dengan transparansi penuh.
+            </p>
           </div>
           
           {/* Newsletter */}
@@ -129,6 +129,66 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Dialog */}
+      <Dialog open={showContact} onOpenChange={setShowContact}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Hubungi Kami</DialogTitle>
+            <DialogDescription>
+              Silakan hubungi kami melalui salah satu saluran di bawah ini.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="flex items-center gap-3">
+              <Phone className="h-5 w-5 text-ocean" />
+              <div>
+                <p className="font-medium">WhatsApp</p>
+                <a href="https://wa.me/6281234567890" className="text-ocean hover:underline">
+                  +62 812-3456-7890
+                </a>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <svg className="h-5 w-5 text-ocean" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"></path>
+              </svg>
+              <div>
+                <p className="font-medium">Email</p>
+                <a href="mailto:info@aquaharvest.id" className="text-ocean hover:underline">
+                  info@aquaharvest.id
+                </a>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <svg className="h-5 w-5 text-ocean" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"></path>
+              </svg>
+              <div>
+                <p className="font-medium">Alamat</p>
+                <p className="text-sm text-gray-500">
+                  Jl. Ikan Bawal No. 123<br />
+                  Jakarta Selatan, 12345<br />
+                  Indonesia
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <svg className="h-5 w-5 text-ocean" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.5 6h3v8h-3v-8zm0-3.5h3v2.5h-3v-2.5z"></path>
+              </svg>
+              <div>
+                <p className="font-medium">Jam Operasional</p>
+                <p className="text-sm text-gray-500">
+                  Senin - Jumat: 08:00 - 17:00<br />
+                  Sabtu: 09:00 - 15:00<br />
+                  Minggu: Tutup
+                </p>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </footer>
   );
 };
