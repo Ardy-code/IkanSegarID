@@ -6,23 +6,23 @@ const Benefits = () => {
   const benefits = [
     {
       icon: <Fish className="h-8 w-8 text-ocean" />,
-      title: "Freshly Caught",
-      description: "Our fish goes from pond to plate in record time, ensuring peak freshness and taste."
+      title: "Baru Ditangkap",
+      description: "Ikan kami dari kolam ke piring dalam waktu singkat, memastikan kesegaran dan rasa terbaik."
     },
     {
       icon: <Verified className="h-8 w-8 text-ocean" />,
-      title: "Source Verified",
-      description: "Track your fish's journey with our transparent, blockchain-based verification system."
+      title: "Sumber Terverifikasi",
+      description: "Lacak perjalanan ikan Anda dengan sistem verifikasi blockchain transparan kami."
     },
     {
       icon: <MapPinCheck className="h-8 w-8 text-ocean" />,
-      title: "Farmer Direct",
-      description: "Buy directly from local farmers, supporting sustainable practices and communities."
+      title: "Langsung dari Peternak",
+      description: "Beli langsung dari peternak lokal, mendukung praktik berkelanjutan dan komunitas."
     },
     {
       icon: <BookOpen className="h-8 w-8 text-ocean" />,
-      title: "Healthy Cooking Guides",
-      description: "Access delicious, nutritionist-approved recipes tailored to each fish variety."
+      title: "Panduan Memasak Sehat",
+      description: "Akses resep lezat yang disetujui ahli gizi dan disesuaikan untuk setiap jenis ikan."
     }
   ];
 
@@ -30,10 +30,10 @@ const Benefits = () => {
     <div className="bg-white py-16">
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="section-title">Why Choose Aquaharvest?</h2>
+          <h2 className="section-title">Mengapa Memilih Aquaharvest?</h2>
           <p className="section-subtitle">
-            We've reimagined the farm-to-table experience for freshwater fish, 
-            connecting you directly to sustainable sources.
+            Kami telah merancang ulang pengalaman dari-peternakan-ke-meja untuk ikan air tawar, 
+            menghubungkan Anda langsung ke sumber berkelanjutan.
           </p>
         </div>
         

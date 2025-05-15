@@ -18,8 +18,8 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-gray-400 mb-6">
-              Connecting consumers with sustainable, local freshwater fish farmers for 
-              the freshest, most transparent seafood experience.
+              Menghubungkan konsumen dengan peternak ikan air tawar yang berkelanjutan 
+              untuk pengalaman makanan laut yang paling segar dan transparan.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -54,65 +54,65 @@ const Footer = () => {
           
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-4">Tautan Cepat</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Beranda</a>
               </li>
               <li>
-                <a href="#products" className="text-gray-400 hover:text-white transition-colors">Products</a>
+                <a href="#products" className="text-gray-400 hover:text-white transition-colors">Produk</a>
               </li>
               <li>
-                <a href="#track" className="text-gray-400 hover:text-white transition-colors">Track Your Fish</a>
+                <a href="#track" className="text-gray-400 hover:text-white transition-colors">Lacak Ikan Anda</a>
               </li>
               <li>
-                <a href="#recipes" className="text-gray-400 hover:text-white transition-colors">Recipes</a>
+                <a href="#recipes" className="text-gray-400 hover:text-white transition-colors">Resep</a>
               </li>
               <li>
-                <a href="#about" className="text-gray-400 hover:text-white transition-colors">About Us</a>
+                <a href="#about" className="text-gray-400 hover:text-white transition-colors">Tentang Kami</a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
+                <a href="#contact" className="text-gray-400 hover:text-white transition-colors">Kontak</a>
               </li>
             </ul>
           </div>
           
           {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Resources</h3>
+            <h3 className="font-bold text-lg mb-4">Sumber Daya</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Sustainable Practices</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Praktik Berkelanjutan</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Partner Farmers</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Peternak Mitra</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Nutritional Information</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Informasi Gizi</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Cooking Guides</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Panduan Memasak</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">FAQs</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">FAQ</a>
               </li>
             </ul>
           </div>
           
           {/* Newsletter */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Stay Updated</h3>
+            <h3 className="font-bold text-lg mb-4">Tetap Terupdate</h3>
             <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter for recipes, sustainability tips, and exclusive offers.
+              Berlangganan buletin kami untuk resep, tips keberlanjutan, dan penawaran eksklusif.
             </p>
             <div className="flex gap-2">
               <Input 
                 type="email" 
-                placeholder="Your email address" 
+                placeholder="Alamat email Anda" 
                 className="bg-gray-800 border-gray-700"
               />
               <Button className="bg-ocean hover:bg-ocean-dark whitespace-nowrap">
-                Subscribe
+                Berlangganan
               </Button>
             </div>
           </div>
@@ -120,12 +120,12 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Aquaharvest. All rights reserved.
+            © {new Date().getFullYear()} Aquaharvest. Hak cipta dilindungi.
           </p>
           <div className="flex space-x-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Sustainability Pledge</a>
+            <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+            <a href="#" className="hover:text-white transition-colors">Ketentuan Layanan</a>
+            <a href="#" className="hover:text-white transition-colors">Janji Keberlanjutan</a>
           </div>
         </div>
       </div>

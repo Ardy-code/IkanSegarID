@@ -12,23 +12,23 @@ interface Testimonial {
 const Testimonials = () => {
   const testimonials: Testimonial[] = [
     {
-      quote: "As a restaurant owner, I've never found fish this fresh anywhere else. My customers can taste the difference, and I love supporting local farmers.",
+      quote: "Sebagai pemilik restoran, saya belum pernah menemukan ikan sesegar ini di tempat lain. Pelanggan saya bisa merasakan perbedaannya, dan saya senang mendukung peternak lokal.",
       name: "Maria Johnson",
-      role: "Restaurant Owner",
+      role: "Pemilik Restoran",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=60",
       type: "customer"
     },
     {
-      quote: "Partnering with Aquaharvest has transformed my small farm. Their platform connects me directly to people who value sustainability and quality.",
+      quote: "Bermitra dengan Aquaharvest telah mengubah peternakan kecil saya. Platform mereka menghubungkan saya langsung dengan orang-orang yang menghargai keberlanjutan dan kualitas.",
       name: "Robert Chen",
-      role: "Fish Farmer, Blue Creek Aquaculture",
+      role: "Peternak Ikan, Budidaya Sungai Biru",
       image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&auto=format&fit=crop&q=60",
       type: "farmer"
     },
     {
-      quote: "I love knowing exactly where my food comes from. The tracking feature gives me peace of mind about the quality and ethics of what I'm feeding my family.",
+      quote: "Saya senang mengetahui dengan tepat dari mana makanan saya berasal. Fitur pelacakan memberikan saya ketenangan pikiran tentang kualitas dan etika dari apa yang saya berikan kepada keluarga saya.",
       name: "Sarah Martinez",
-      role: "Health-Conscious Parent",
+      role: "Orang Tua yang Sadar Kesehatan",
       image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80",
       type: "customer"
     }
@@ -38,10 +38,10 @@ const Testimonials = () => {
     <div className="bg-ocean-dark py-16 text-white">
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="section-title text-white">What Our Community Says</h2>
+          <h2 className="section-title text-white">Apa Kata Komunitas Kami</h2>
           <p className="section-subtitle text-white/80">
-            We're proud to connect customers and farmers in a transparent ecosystem 
-            that benefits everyone involved.
+            Kami bangga menghubungkan pelanggan dan peternak dalam ekosistem 
+            transparan yang menguntungkan semua pihak yang terlibat.
           </p>
         </div>
         
@@ -74,7 +74,7 @@ const Testimonials = () => {
                 </div>
                 {testimonial.type === "farmer" && (
                   <div className="ml-auto bg-nature-green rounded-full px-3 py-1 text-xs text-gray-800 font-medium">
-                    Partner Farmer
+                    Peternak Mitra
                   </div>
                 )}
               </div>

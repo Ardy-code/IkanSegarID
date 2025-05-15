@@ -21,25 +21,25 @@ const Hero = () => {
           <div className="mb-6 inline-block animate-fade-in">
             <div className="bg-white/10 backdrop-blur-lg px-4 py-2 rounded-full inline-flex items-center">
               <Fish className="h-5 w-5 mr-2 text-ocean-light" />
-              <span className="text-sm font-medium">100% Sustainably Harvested</span>
+              <span className="text-sm font-medium">100% Dipanen secara Berkelanjutan</span>
             </div>
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in animate-delay-100">
-            From Pond to Plate: Fresh, Sustainable Fish Delivered to You
+            Dari Kolam ke Piring: Ikan Segar dan Berkelanjutan Dikirim Untuk Anda
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in animate-delay-200">
-            Connecting you directly with local fish farmers for the freshest, most sustainable fish available.
+            Menghubungkan Anda langsung dengan peternak ikan lokal untuk mendapatkan ikan paling segar dan berkelanjutan.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in animate-delay-300">
             <Button className="btn-primary text-lg py-6" size="lg">
-              Explore Products
+              Jelajahi Produk
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button className="btn-secondary text-lg py-6 bg-white/20 backdrop-blur-lg hover:bg-white/30 border-white/40 text-white" size="lg">
-              Track Fish Origin
+              Lacak Asal Ikan
             </Button>
           </div>
         </div>

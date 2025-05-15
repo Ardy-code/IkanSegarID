@@ -26,7 +26,7 @@ const TrackOrigin = () => {
     e.preventDefault();
     
     if (!trackingId) {
-      setError("Please enter a tracking ID");
+      setError("Silakan masukkan ID pelacakan");
       return;
     }
     
@@ -39,17 +39,17 @@ const TrackOrigin = () => {
       if (trackingId === "FISH123") {
         setResult({
           id: "FISH123",
-          farm: "Clear Water Aquafarm",
+          farm: "Peternakan Aqua Jernih",
           farmer: "John Miller",
           location: "Springfield, Oregon",
-          harvestDate: "May 10, 2025",
-          species: "Rainbow Trout",
-          feedType: "Organic plant-based feed",
-          certifications: ["Sustainable Harvest Certified", "Clean Water Partner"],
+          harvestDate: "10 Mei 2025",
+          species: "Ikan Trout Pelangi",
+          feedType: "Pakan berbasis tanaman organik",
+          certifications: ["Panen Berkelanjutan Tersertifikasi", "Mitra Air Bersih"],
           image: "https://images.unsplash.com/photo-1518890569493-668df9a00266?w=500&auto=format&fit=crop&q=80"
         });
       } else {
-        setError("No tracking information found for this ID. Try FISH123 for a demo.");
+        setError("Tidak ditemukan informasi pelacakan untuk ID ini. Coba FISH123 untuk demo.");
         setResult(null);
       }
       setIsLoading(false);
@@ -62,23 +62,23 @@ const TrackOrigin = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Track Your Fish's Journey
+              Lacak Perjalanan Ikan Anda
             </h2>
             <p className="text-gray-600 mb-6">
-              Every Aquaharvest product comes with a unique tracking ID that allows
-              you to trace your fish from the farm to your table, ensuring 
-              transparency and sustainability in every purchase.
+              Setiap produk Aquaharvest dilengkapi dengan ID pelacakan unik yang 
+              memungkinkan Anda melacak ikan Anda dari peternakan ke meja Anda, 
+              memastikan transparansi dan keberlanjutan dalam setiap pembelian.
             </p>
             
             <form onSubmit={handleSubmit} className="space-y-4 mb-6">
               <div>
                 <label htmlFor="tracking-id" className="block text-sm font-medium text-gray-700 mb-1">
-                  Enter Product Tracking ID
+                  Masukkan ID Pelacakan Produk
                 </label>
                 <div className="flex gap-2">
                   <Input
                     id="tracking-id"
-                    placeholder="e.g. FISH123"
+                    placeholder="mis. FISH123"
                     value={trackingId}
                     onChange={(e) => setTrackingId(e.target.value)}
                     className="flex-1"
@@ -88,7 +88,7 @@ const TrackOrigin = () => {
                     disabled={isLoading}
                     className="bg-ocean hover:bg-ocean-dark"
                   >
-                    {isLoading ? "Tracking..." : "Track Now"}
+                    {isLoading ? "Melacak..." : "Lacak Sekarang"}
                   </Button>
                 </div>
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
@@ -111,7 +111,7 @@ const TrackOrigin = () => {
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-ocean mr-2 mt-0.5" />
                     <div>
-                      <p className="font-medium">Farm Location</p>
+                      <p className="font-medium">Lokasi Peternakan</p>
                       <p className="text-gray-600">{result.location}</p>
                     </div>
                   </div>
@@ -119,7 +119,7 @@ const TrackOrigin = () => {
                   <div className="flex items-start">
                     <Calendar className="h-5 w-5 text-ocean mr-2 mt-0.5" />
                     <div>
-                      <p className="font-medium">Harvest Date</p>
+                      <p className="font-medium">Tanggal Panen</p>
                       <p className="text-gray-600">{result.harvestDate}</p>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ const TrackOrigin = () => {
                   <div className="flex items-start">
                     <ChefHat className="h-5 w-5 text-ocean mr-2 mt-0.5" />
                     <div>
-                      <p className="font-medium">Farmer</p>
+                      <p className="font-medium">Peternak</p>
                       <p className="text-gray-600">{result.farmer}, {result.farm}</p>
                     </div>
                   </div>
@@ -135,7 +135,7 @@ const TrackOrigin = () => {
                   <div className="flex items-start">
                     <ChefHat className="h-5 w-5 text-ocean mr-2 mt-0.5" />
                     <div>
-                      <p className="font-medium">Feed Type</p>
+                      <p className="font-medium">Jenis Pakan</p>
                       <p className="text-gray-600">{result.feedType}</p>
                     </div>
                   </div>
@@ -158,17 +158,17 @@ const TrackOrigin = () => {
           <div className="relative h-[400px] md:h-[500px] rounded-xl overflow-hidden">
             <img 
               src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&auto=format&fit=crop&q=80" 
-              alt="Fish farmer checking water quality" 
+              alt="Peternak ikan memeriksa kualitas air" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
               <div className="p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Meet Our Farmers</h3>
+                <h3 className="text-2xl font-bold mb-2">Temui Peternak Kami</h3>
                 <p className="mb-4">
-                  Our network of dedicated local farmers prioritize sustainability and quality in every harvest.
+                  Jaringan peternak lokal kami yang berdedikasi memprioritaskan keberlanjutan dan kualitas dalam setiap panen.
                 </p>
                 <Button variant="outline" className="bg-white/20 hover:bg-white/30 text-white border-white/40">
-                  Learn More
+                  Pelajari Lebih Lanjut
                 </Button>
               </div>
             </div>

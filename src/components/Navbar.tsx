@@ -50,47 +50,47 @@ const Navbar = () => {
               href="#"
               className="text-gray-700 hover:text-ocean hover:underline underline-offset-8 px-2 py-1 font-medium"
             >
-              Home
+              Beranda
             </a>
             <a
               href="#products"
               className="text-gray-700 hover:text-ocean hover:underline underline-offset-8 px-2 py-1 font-medium"
             >
-              Products
+              Produk
             </a>
             <a
               href="#track"
               className="text-gray-700 hover:text-ocean hover:underline underline-offset-8 px-2 py-1 font-medium"
             >
-              Track Your Fish
+              Lacak Ikan
             </a>
             <a
               href="#recipes"
               className="text-gray-700 hover:text-ocean hover:underline underline-offset-8 px-2 py-1 font-medium"
             >
-              Recipes
+              Resep
             </a>
             <a
               href="#about"
               className="text-gray-700 hover:text-ocean hover:underline underline-offset-8 px-2 py-1 font-medium"
             >
-              About Us
+              Tentang Kami
             </a>
             <a
               href="#contact"
               className="text-gray-700 hover:text-ocean hover:underline underline-offset-8 px-2 py-1 font-medium"
             >
-              Contact
+              Kontak
             </a>
           </div>
 
           {/* Login/Register Buttons */}
           <div className="hidden md:flex md:items-center md:space-x-3">
             <Button variant="outline" className="hover:bg-ocean hover:text-white">
-              Log In
+              Masuk
             </Button>
             <Button variant="default" className="bg-ocean hover:bg-ocean-dark">
-              Register
+              Daftar
             </Button>
           </div>
 
@@ -103,7 +103,7 @@ const Navbar = () => {
               aria-expanded="false"
               onClick={toggleMobileMenu}
             >
-              <span className="sr-only">Open main menu</span>
+              <span className="sr-only">Buka menu utama</span>
               {/* Hamburger Icon */}
               {!isMobileMenuOpen ? (
                 <svg
@@ -153,44 +153,44 @@ const Navbar = () => {
             href="#"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
           >
-            Home
+            Beranda
           </a>
           <a
             href="#products"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
           >
-            Products
+            Produk
           </a>
           <a
             href="#track"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
           >
-            Track Your Fish
+            Lacak Ikan
           </a>
           <a
             href="#recipes"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
           >
-            Recipes
+            Resep
           </a>
           <a
             href="#about"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
           >
-            About Us
+            Tentang Kami
           </a>
           <a
             href="#contact"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
           >
-            Contact
+            Kontak
           </a>
           <div className="flex space-x-2 mt-3 px-3">
             <Button variant="outline" className="w-1/2">
-              Log In
+              Masuk
             </Button>
             <Button variant="default" className="w-1/2 bg-ocean">
-              Register
+              Daftar
             </Button>
           </div>
         </div>
