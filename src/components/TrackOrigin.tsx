@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MapPin, Calendar, Verified, Chef, ChefHat } from "lucide-react";
+import { MapPin, Calendar, Verified, ChefHat } from "lucide-react";
 
 interface TrackingResult {
   id: string;
@@ -133,7 +133,7 @@ const TrackOrigin = () => {
                   </div>
                   
                   <div className="flex items-start">
-                    <Chef className="h-5 w-5 text-ocean mr-2 mt-0.5" />
+                    <ChefHat className="h-5 w-5 text-ocean mr-2 mt-0.5" />
                     <div>
                       <p className="font-medium">Feed Type</p>
                       <p className="text-gray-600">{result.feedType}</p>
