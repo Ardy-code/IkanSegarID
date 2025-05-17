@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import AuthButtons from "./AuthButtons";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -60,13 +61,8 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         >
           Kontak
         </a>
-        <div className="flex space-x-2 mt-3 px-3">
-          <Button variant="outline" className="w-1/2">
-            Masuk
-          </Button>
-          <Button variant="default" className="w-1/2 bg-ocean">
-            Daftar
-          </Button>
+        <div className="mt-3 px-3">
+          <AuthButtons isMobile={true} />
         </div>
       </div>
     </div>

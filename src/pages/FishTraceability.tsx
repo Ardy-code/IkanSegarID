@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import TracingTutorial from "@/components/TracingTutorial";
 
 const FishTraceability = () => {
   const [trackingCode, setTrackingCode] = React.useState("");
@@ -136,6 +137,11 @@ const FishTraceability = () => {
               </CardContent>
             </Card>
           )}
+          
+          {/* Tutorial section */}
+          <div className="mt-16">
+            <TracingTutorial />
+          </div>
         </div>
       </div>
       <Footer />
