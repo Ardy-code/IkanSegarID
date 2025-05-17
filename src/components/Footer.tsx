@@ -66,21 +66,22 @@ const Footer = () => {
             <h3 className="font-bold text-lg mb-4">Tautan Cepat</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Beranda</a>
+                <a href="/" className="text-gray-400 hover:text-white transition-colors">Beranda</a>
               </li>
               <li>
-                <a href="#products" className="text-gray-400 hover:text-white transition-colors">Produk</a>
+                <a href="/products" className="text-gray-400 hover:text-white transition-colors">Produk</a>
               </li>
               <li>
-                <a href="#track" className="text-gray-400 hover:text-white transition-colors">Lacak Ikan Anda</a>
+                <a href="/fish-traceability" className="text-gray-400 hover:text-white transition-colors">Lacak Ikan Anda</a>
               </li>
               <li>
-                <a href="#recipes" className="text-gray-400 hover:text-white transition-colors">Resep</a>
+                <a href="/#recipes" className="text-gray-400 hover:text-white transition-colors">Resep</a>
               </li>
               <li>
                 <button 
                   onClick={() => setShowContact(true)}
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                  id="contact"
                 >
                   <Phone className="w-4 h-4" /> Kontak
                 </button>
@@ -89,7 +90,7 @@ const Footer = () => {
           </div>
           
           {/* About Us */}
-          <div>
+          <div id="about">
             <h3 className="font-bold text-lg mb-4">Tentang Kami</h3>
             <p className="text-gray-400 mb-4">
               Aquaharvest didirikan pada tahun 2018 dengan misi untuk menghubungkan konsumen langsung dengan peternak ikan air tawar yang berkualitas.

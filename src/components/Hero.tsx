@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Fish, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -34,13 +35,17 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in animate-delay-300">
-            <Button className="btn-primary text-lg py-6" size="lg">
-              Jelajahi Produk
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button className="btn-secondary text-lg py-6 bg-white/20 backdrop-blur-lg hover:bg-white/30 border-white/40 text-white" size="lg">
-              Lacak Asal Ikan
-            </Button>
+            <Link to="/products">
+              <Button className="btn-primary text-lg py-6" size="lg">
+                Jelajahi Produk
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link to="/fish-traceability">
+              <Button className="btn-secondary text-lg py-6 bg-white/20 backdrop-blur-lg hover:bg-white/30 border-white/40 text-white" size="lg">
+                Lacak Asal Ikan
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

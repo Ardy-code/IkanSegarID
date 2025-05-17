@@ -1,16 +1,39 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import LoginForm from "@/components/auth/LoginForm";
+import SignupForm from "@/components/auth/SignupForm";
 
 const AuthButtons = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+
   return (
     <>
-      <Button variant="outline" className="hover:bg-ocean hover:text-white">
+      <Button 
+        variant="outline" 
+        className="hover:bg-ocean hover:text-white"
+        onClick={() => setShowLoginModal(true)}
+      >
         Masuk
       </Button>
-      <Button variant="default" className="bg-ocean hover:bg-ocean-dark">
+      <Button 
+        variant="default" 
+        className="bg-ocean hover:bg-ocean-dark"
+        onClick={() => setShowSignupModal(true)}
+      >
         Daftar
       </Button>
+
+      <LoginForm 
+        isOpen={showLoginModal} 
+        onClose={() => setShowLoginModal(false)} 
+      />
+      
+      <SignupForm 
+        isOpen={showSignupModal} 
+        onClose={() => setShowSignupModal(false)} 
+      />
     </>
   );
 };

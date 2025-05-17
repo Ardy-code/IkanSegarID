@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Verified } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Product {
   id: string;
@@ -12,8 +13,12 @@ interface Product {
   location: string;
 }
 
-const FeaturedProducts = () => {
-  const products: Product[] = [
+interface FeaturedProductsProps {
+  fullCatalog?: boolean;
+}
+
+export const FeaturedProducts = ({ fullCatalog = false }: FeaturedProductsProps) => {
+  const allProducts: Product[] = [
     {
       id: "trout-001",
       name: "Fillet Ikan Trout Pelangi",
@@ -45,19 +50,56 @@ const FeaturedProducts = () => {
       image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&auto=format&fit=crop&q=80",
       farmer: "Perikanan Arus Gunung",
       location: "Bend, OR"
+    },
+    {
+      id: "carp-005",
+      name: "Ikan Mas Segar",
+      price: 8.99,
+      image: "https://images.unsplash.com/photo-1611704067869-5af327381cac?w=500&auto=format&fit=crop&q=80",
+      farmer: "Kolam Ikan Sejahtera",
+      location: "Banda Aceh, ID"
+    },
+    {
+      id: "seabass-006",
+      name: "Kakap Putih Premium",
+      price: 18.99,
+      image: "https://images.unsplash.com/photo-1573093092871-46ef4ab2b52c?w=500&auto=format&fit=crop&q=80",
+      farmer: "Peternakan Laut Biru",
+      location: "Bali, ID"
+    },
+    {
+      id: "tuna-007",
+      name: "Tuna Sirip Kuning",
+      price: 22.99,
+      image: "https://images.unsplash.com/photo-1544551763-92ab472cad5f?w=500&auto=format&fit=crop&q=80",
+      farmer: "Nelayan Samudera",
+      location: "Ambon, ID"
+    },
+    {
+      id: "cod-008",
+      name: "Ikan Kod Segar",
+      price: 14.99,
+      image: "https://images.unsplash.com/photo-1559376767-54104ae6eb97?w=500&auto=format&fit=crop&q=80",
+      farmer: "Peternakan Teluk Biru",
+      location: "Manado, ID"
     }
   ];
 
+  // Show only first 4 products on home page
+  const products = fullCatalog ? allProducts : allProducts.slice(0, 4);
+
   return (
-    <div id="products" className="bg-gray-50 py-16">
+    <div id="products" className={fullCatalog ? "" : "bg-gray-50 py-16"}>
       <div className="section-container">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="section-title">Produk Unggulan</h2>
-          <p className="section-subtitle">
-            Jelajahi pilihan ikan yang baru dipanen dari peternakan lokal,
-            semuanya bersumber secara berkelanjutan dan dikirim dengan kesegaran terbaik.
-          </p>
-        </div>
+        {!fullCatalog && (
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="section-title">Produk Unggulan</h2>
+            <p className="section-subtitle">
+              Jelajahi pilihan ikan yang baru dipanen dari peternakan lokal,
+              semuanya bersumber secara berkelanjutan dan dikirim dengan kesegaran terbaik.
+            </p>
+          </div>
+        )}
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product, index) => (
@@ -97,11 +139,15 @@ const FeaturedProducts = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12">
-          <Button className="btn-primary">
-            Lihat Semua Produk
-          </Button>
-        </div>
+        {!fullCatalog && (
+          <div className="text-center mt-12">
+            <Link to="/products">
+              <Button className="btn-primary">
+                Lihat Semua Produk
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
