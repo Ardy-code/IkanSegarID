@@ -16,7 +16,7 @@ import {
   TabsTrigger 
 } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { Search, Smartphone, ShoppingCart, Info, AlertCircle, Check } from "lucide-react";
+import { Search, Info, AlertCircle, Check } from "lucide-react";
 
 const TracingTutorial = () => {
   return (
@@ -31,9 +31,8 @@ const TracingTutorial = () => {
           </p>
 
           <Tabs defaultValue="code" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="code">Menggunakan Kode</TabsTrigger>
-              <TabsTrigger value="scan">Memindai QR</TabsTrigger>
               <TabsTrigger value="tips">Tips & Informasi</TabsTrigger>
             </TabsList>
             
@@ -121,70 +120,6 @@ const TracingTutorial = () => {
               </Card>
             </TabsContent>
             
-            <TabsContent value="scan" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Pelacakan Menggunakan QR Code</CardTitle>
-                  <CardDescription>
-                    Gunakan smartphone Anda untuk memindai QR code pada kemasan.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-ocean text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">1</div>
-                    <div>
-                      <h3 className="font-medium mb-1">Temukan QR Code</h3>
-                      <p className="text-gray-600 text-sm">
-                        Cari QR code yang tercetak pada kemasan produk Anda, biasanya di bagian belakang atau samping.
-                      </p>
-                      <div className="mt-3 flex justify-center">
-                        <div className="w-32 h-32 bg-white border-2 border-gray-300 rounded-lg flex items-center justify-center">
-                          <div className="w-24 h-24 bg-gray-800 rounded-lg flex items-center justify-center">
-                            <div className="w-16 h-16 bg-white rounded-md"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-ocean text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">2</div>
-                    <div>
-                      <h3 className="font-medium mb-1">Siapkan Kamera Smartphone</h3>
-                      <p className="text-gray-600 text-sm">
-                        Buka aplikasi kamera pada smartphone Anda, atau gunakan pemindai QR code khusus.
-                      </p>
-                      <div className="mt-3 flex justify-center">
-                        <div className="bg-gray-200 p-3 rounded-xl">
-                          <Smartphone className="h-12 w-12 text-ocean" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-ocean text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">3</div>
-                    <div>
-                      <h3 className="font-medium mb-1">Pindai QR Code</h3>
-                      <p className="text-gray-600 text-sm">
-                        Arahkan kamera ke QR code dan tunggu hingga terbaca. Sistem akan secara otomatis membuka halaman hasil pelacakan.
-                      </p>
-                      <div className="mt-3 flex justify-center">
-                        <div className="w-32 h-32 border-4 border-dashed border-ocean rounded-lg flex items-center justify-center">
-                          <Search className="h-10 w-10 text-ocean animate-pulse" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <p className="text-sm text-gray-500">
-                    Pastikan smartphone Anda terhubung ke internet saat memindai QR code.
-                  </p>
-                </CardFooter>
-              </Card>
-            </TabsContent>
-            
             <TabsContent value="tips" className="mt-6">
               <Card>
                 <CardHeader>
@@ -206,23 +141,10 @@ const TracingTutorial = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-blue-100 p-2 rounded-lg">
-                      <ShoppingCart className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium mb-1">Di Mana Membeli Produk Kami?</h3>
-                      <p className="text-gray-600 text-sm">
-                        Produk Aquaharvest tersedia di supermarket terpilih di seluruh Indonesia dan melalui platform e-commerce resmi kami.
-                      </p>
-                    </div>
-                  </div>
-                  
                   <div className="bg-gray-100 p-4 rounded-lg">
                     <h3 className="font-medium mb-2">Pemecahan Masalah Umum:</h3>
                     <ul className="space-y-2 text-sm text-gray-600 list-disc pl-6">
                       <li>Pastikan Anda mengetik kode pelacakan dengan benar, termasuk huruf besar dan kecil.</li>
-                      <li>QR code yang rusak atau terhalang mungkin tidak dapat dipindai, gunakan kode pelacakan manual sebagai gantinya.</li>
                       <li>Periksa koneksi internet Anda jika halaman hasil tidak muncul.</li>
                       <li>Jika produk tidak memiliki kode pelacakan, hubungi layanan pelanggan kami dengan menyebutkan nomor batch dan tanggal produksi.</li>
                     </ul>

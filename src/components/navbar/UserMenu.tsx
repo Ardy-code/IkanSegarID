@@ -14,7 +14,6 @@ import UserProfile from "@/components/auth/UserProfile";
 import AuthButtons from "@/components/navbar/AuthButtons";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { User } from "lucide-react";
-import { Link } from "react-router-dom";
 
 interface UserMenuProps {
   isMobile?: boolean;
@@ -54,14 +53,6 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
           >
             Profil Saya
           </Button>
-          <Link to="/orders" className="w-full block">
-            <Button 
-              variant="outline" 
-              className="w-full mb-2"
-            >
-              Pesanan Saya
-            </Button>
-          </Link>
           <Button 
             variant="destructive" 
             className="w-full"
@@ -92,11 +83,6 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
             >
               Profil
             </DropdownMenuItem>
-            <Link to="/orders">
-              <DropdownMenuItem className="cursor-pointer">
-                Pesanan Saya
-              </DropdownMenuItem>
-            </Link>
             <DropdownMenuSeparator />
             <DropdownMenuItem 
               className="text-red-600 cursor-pointer"
