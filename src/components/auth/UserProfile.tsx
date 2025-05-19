@@ -11,6 +11,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useUser } from "@/contexts/UserContext";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { User } from "lucide-react";
 
 interface UserProfileProps {
   isOpen: boolean;
@@ -23,6 +25,8 @@ const UserProfile = ({ isOpen, onClose }: UserProfileProps) => {
   const [lastName, setLastName] = useState(user?.lastName || "");
   const [email, setEmail] = useState(user?.email || "");
   const [isUpdating, setIsUpdating] = useState(false);
+  
+  const userInitials = `${firstName.charAt(0) || ''}${lastName.charAt(0) || ''}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,13 +57,14 @@ const UserProfile = ({ isOpen, onClose }: UserProfileProps) => {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">
           <div className="flex justify-center mb-4">
-            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-ocean">
-              <img 
-                src={user?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=default"} 
-                alt="Avatar" 
-                className="w-full h-full object-cover"
+            <Avatar className="w-24 h-24">
+              <AvatarImage 
+                src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.email}`}
+                alt="Avatar"
+                className="w-full h-full object-cover" 
               />
-            </div>
+              <AvatarFallback className="text-2xl">{userInitials || <User size={32} />}</AvatarFallback>
+            </Avatar>
           </div>
           
           <div className="grid grid-cols-2 gap-4">
@@ -98,7 +103,7 @@ const UserProfile = ({ isOpen, onClose }: UserProfileProps) => {
           
           <Button 
             type="submit" 
-            className="w-full bg-ocean hover:bg-ocean-dark"
+            className="w-full"
             disabled={isUpdating}
           >
             {isUpdating ? "Menyimpan..." : "Simpan Perubahan"}

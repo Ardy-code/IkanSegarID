@@ -12,6 +12,9 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/UserContext";
 import UserProfile from "@/components/auth/UserProfile";
 import AuthButtons from "@/components/navbar/AuthButtons";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface UserMenuProps {
   isMobile?: boolean;
@@ -25,18 +28,20 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
     return <AuthButtons isMobile={isMobile} />;
   }
 
+  const userInitials = `${user.firstName?.charAt(0) || ''}${user.lastName?.charAt(0) || ''}`;
+
   return (
     <>
       {isMobile ? (
         <div className="space-y-2">
           <div className="flex items-center space-x-2 mb-2">
-            <div className="w-8 h-8 rounded-full overflow-hidden">
-              <img 
-                src={user.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=default"} 
-                alt="Avatar" 
-                className="w-full h-full object-cover"
+            <Avatar className="h-8 w-8">
+              <AvatarImage 
+                src={user.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`} 
+                alt="Avatar"
               />
-            </div>
+              <AvatarFallback>{userInitials || <User size={16} />}</AvatarFallback>
+            </Avatar>
             <div>
               <p className="font-medium">{user.firstName} {user.lastName}</p>
               <p className="text-sm text-gray-500">{user.email}</p>
@@ -49,6 +54,22 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
           >
             Profil Saya
           </Button>
+          <Link to="/orders" className="w-full block">
+            <Button 
+              variant="outline" 
+              className="w-full mb-2"
+            >
+              Pesanan Saya
+            </Button>
+          </Link>
+          <Link to="/wishlist" className="w-full block">
+            <Button 
+              variant="outline" 
+              className="w-full mb-2"
+            >
+              Wishlist
+            </Button>
+          </Link>
           <Button 
             variant="destructive" 
             className="w-full"
@@ -61,13 +82,13 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-              <div className="h-8 w-8 rounded-full overflow-hidden border border-gray-200">
-                <img 
-                  src={user.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=default"} 
+              <Avatar className="h-8 w-8">
+                <AvatarImage 
+                  src={user.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`} 
                   alt="Avatar" 
-                  className="h-full w-full object-cover"
                 />
-              </div>
+                <AvatarFallback>{userInitials || <User size={16} />}</AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -79,12 +100,16 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
             >
               Profil
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
-              Pesanan Saya
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
-              Wishlist
-            </DropdownMenuItem>
+            <Link to="/orders">
+              <DropdownMenuItem className="cursor-pointer">
+                Pesanan Saya
+              </DropdownMenuItem>
+            </Link>
+            <Link to="/wishlist">
+              <DropdownMenuItem className="cursor-pointer">
+                Wishlist
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
             <DropdownMenuItem 
               className="text-red-600 cursor-pointer"
