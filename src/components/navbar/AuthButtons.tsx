@@ -12,31 +12,43 @@ const AuthButtons = ({ isMobile = false }: AuthButtonsProps) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
 
+  const handleOpenLogin = () => {
+    setShowLoginModal(true);
+    setShowSignupModal(false);
+  };
+
+  const handleOpenSignup = () => {
+    setShowSignupModal(true);
+    setShowLoginModal(false);
+  };
+
   return (
     <>
       <Button 
         variant="outline" 
         className={`hover:bg-ocean hover:text-white ${isMobile ? "w-full mb-2" : ""}`}
-        onClick={() => setShowLoginModal(true)}
+        onClick={handleOpenLogin}
       >
         Masuk
       </Button>
       <Button 
         variant="default" 
         className={`bg-ocean hover:bg-ocean-dark ${isMobile ? "w-full" : ""}`}
-        onClick={() => setShowSignupModal(true)}
+        onClick={handleOpenSignup}
       >
         Daftar
       </Button>
 
       <LoginForm 
         isOpen={showLoginModal} 
-        onClose={() => setShowLoginModal(false)} 
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToSignup={handleOpenSignup}
       />
       
       <SignupForm 
         isOpen={showSignupModal} 
-        onClose={() => setShowSignupModal(false)} 
+        onClose={() => setShowSignupModal(false)}
+        onSwitchToLogin={handleOpenLogin}
       />
     </>
   );

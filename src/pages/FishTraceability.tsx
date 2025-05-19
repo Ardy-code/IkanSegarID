@@ -1,21 +1,146 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import TracingTutorial from "@/components/TracingTutorial";
+import { toast } from "sonner";
+
+interface TrackingResult {
+  fishType: string;
+  harvestDate: string;
+  processingDate: string;
+  batchCode: string;
+  farm: string;
+  location: string;
+  farmingMethod: string;
+  certification: string;
+  journey: {
+    step: string;
+    title: string;
+    description: string;
+  }[];
+}
+
+const validTrackingCodes = ["FISH123", "NL20230515", "KP20230612", "TN20230730"];
+
+const getTrackingData = (code: string): TrackingResult | null => {
+  // Mock API response based on tracking code
+  switch (code) {
+    case "FISH123":
+      return {
+        fishType: "Ikan Nila",
+        harvestDate: "15 Mei 2023",
+        processingDate: "16 Mei 2023",
+        batchCode: "#NL-2023-05-15-A",
+        farm: "Kolam Sejahtera",
+        location: "Sungai Cisadane, Bogor, Jawa Barat",
+        farmingMethod: "Kolam Air Tawar Berkelanjutan",
+        certification: "Aquaculture Stewardship Council (ASC)",
+        journey: [
+          {
+            step: "1",
+            title: "Pembudidayaan",
+            description: "Ikan dibudidayakan dalam kolam dengan standar keberlanjutan tinggi."
+          },
+          {
+            step: "2",
+            title: "Pemanenan",
+            description: "Panen dilakukan dengan teknik yang meminimalkan stres pada ikan."
+          },
+          {
+            step: "3",
+            title: "Pengolahan",
+            description: "Pengolahan dilakukan dengan standar keamanan pangan tertinggi."
+          },
+          {
+            step: "4",
+            title: "Distribusi",
+            description: "Produk didistribusikan dengan rantai dingin untuk memastikan kesegaran."
+          },
+          {
+            step: "5",
+            title: "Toko/Pengiriman",
+            description: "Sampai ke tangan Anda dengan kualitas premium."
+          }
+        ]
+      };
+    case "NL20230515":
+      return {
+        fishType: "Ikan Nila Merah",
+        harvestDate: "15 Mei 2023",
+        processingDate: "16 Mei 2023",
+        batchCode: "#NL-2023-05-15-B",
+        farm: "Peternakan Nila Jaya",
+        location: "Waduk Cirata, Purwakarta, Jawa Barat",
+        farmingMethod: "KJA (Keramba Jaring Apung)",
+        certification: "Global G.A.P.",
+        journey: [
+          {
+            step: "1",
+            title: "Pembudidayaan",
+            description: "Ikan dibudidayakan dalam keramba jaring apung dengan standar keberlanjutan."
+          },
+          {
+            step: "2",
+            title: "Pemanenan",
+            description: "Panen dilakukan dengan teknik yang meminimalkan stres pada ikan."
+          },
+          {
+            step: "3",
+            title: "Pengolahan",
+            description: "Pengolahan dilakukan dengan standar HACCP."
+          },
+          {
+            step: "4",
+            title: "Distribusi",
+            description: "Produk didistribusikan dengan rantai dingin untuk memastikan kesegaran."
+          },
+          {
+            step: "5",
+            title: "Toko/Pengiriman",
+            description: "Sampai ke tangan Anda dengan kualitas premium."
+          }
+        ]
+      };
+    default:
+      return null;
+  }
+};
 
 const FishTraceability = () => {
-  const [trackingCode, setTrackingCode] = React.useState("");
-  const [searchPerformed, setSearchPerformed] = React.useState(false);
+  const [trackingCode, setTrackingCode] = useState("");
+  const [result, setResult] = useState<TrackingResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSearchPerformed(true);
-    // Here you would typically fetch tracking data based on the code
-    console.log("Tracking fish with code:", trackingCode);
+    
+    if (!trackingCode.trim()) {
+      setIsValid(false);
+      return;
+    }
+
+    setIsLoading(true);
+    setIsValid(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      const data = getTrackingData(trackingCode);
+      
+      if (data) {
+        setResult(data);
+        toast.success("Data pelacakan berhasil ditemukan!");
+      } else {
+        setResult(null);
+        toast.error("Kode pelacakan tidak ditemukan. Coba gunakan FISH123 untuk contoh.");
+      }
+      
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
@@ -42,97 +167,72 @@ const FishTraceability = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex gap-4 flex-col sm:flex-row">
                   <Input
-                    placeholder="Masukkan kode pelacakan"
+                    placeholder="Masukkan kode pelacakan (coba: FISH123)"
                     value={trackingCode}
                     onChange={(e) => setTrackingCode(e.target.value)}
-                    className="flex-grow"
+                    className={`flex-grow ${!isValid ? 'border-red-500' : ''}`}
                     required
                   />
                   <Button 
                     type="submit"
                     className="bg-ocean hover:bg-ocean-dark"
+                    disabled={isLoading}
                   >
-                    Lacak Sekarang
+                    {isLoading ? "Mencari..." : "Lacak Sekarang"}
                   </Button>
+                </div>
+                {!isValid && (
+                  <p className="text-red-500 text-sm">Silakan masukkan kode pelacakan</p>
+                )}
+                <div className="text-sm text-gray-500 mt-2">
+                  <p>Kode contoh: FISH123, NL20230515</p>
                 </div>
               </form>
             </CardContent>
           </Card>
 
-          {searchPerformed && (
-            <Card>
+          {result && (
+            <Card className="animate-fade-in">
               <CardHeader>
                 <CardTitle>Hasil Pelacakan</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {trackingCode ? (
-                    <>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <h3 className="text-lg font-semibold mb-2">Informasi Produk</h3>
-                          <p><span className="font-medium">Jenis Ikan:</span> Ikan Nila</p>
-                          <p><span className="font-medium">Tanggal Panen:</span> 15 Mei 2023</p>
-                          <p><span className="font-medium">Tanggal Pengolahan:</span> 16 Mei 2023</p>
-                          <p><span className="font-medium">Kode Batch:</span> #NL-2023-05-15-A</p>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-semibold mb-2">Asal Usul</h3>
-                          <p><span className="font-medium">Peternakan:</span> Kolam Sejahtera</p>
-                          <p><span className="font-medium">Lokasi:</span> Sungai Cisadane, Bogor, Jawa Barat</p>
-                          <p><span className="font-medium">Metode Budidaya:</span> Kolam Air Tawar Berkelanjutan</p>
-                          <p><span className="font-medium">Sertifikasi:</span> Aquaculture Stewardship Council (ASC)</p>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold mb-2">Perjalanan Produk</h3>
-                        <div className="relative">
-                          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                          <div className="space-y-6 relative">
-                            <div className="flex gap-4">
-                              <div className="w-8 h-8 rounded-full bg-ocean flex items-center justify-center text-white relative z-10">1</div>
-                              <div>
-                                <p className="font-medium">Pembudidayaan</p>
-                                <p className="text-sm text-gray-600">Ikan dibudidayakan dalam kolam dengan standar keberlanjutan tinggi.</p>
-                              </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Informasi Produk</h3>
+                      <p><span className="font-medium">Jenis Ikan:</span> {result.fishType}</p>
+                      <p><span className="font-medium">Tanggal Panen:</span> {result.harvestDate}</p>
+                      <p><span className="font-medium">Tanggal Pengolahan:</span> {result.processingDate}</p>
+                      <p><span className="font-medium">Kode Batch:</span> {result.batchCode}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Asal Usul</h3>
+                      <p><span className="font-medium">Peternakan:</span> {result.farm}</p>
+                      <p><span className="font-medium">Lokasi:</span> {result.location}</p>
+                      <p><span className="font-medium">Metode Budidaya:</span> {result.farmingMethod}</p>
+                      <p><span className="font-medium">Sertifikasi:</span> {result.certification}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Perjalanan Produk</h3>
+                    <div className="relative">
+                      <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                      <div className="space-y-6 relative">
+                        {result.journey.map((stage, index) => (
+                          <div className="flex gap-4" key={index}>
+                            <div className="w-8 h-8 rounded-full bg-ocean flex items-center justify-center text-white relative z-10">
+                              {stage.step}
                             </div>
-                            <div className="flex gap-4">
-                              <div className="w-8 h-8 rounded-full bg-ocean flex items-center justify-center text-white relative z-10">2</div>
-                              <div>
-                                <p className="font-medium">Pemanenan</p>
-                                <p className="text-sm text-gray-600">Panen dilakukan dengan teknik yang meminimalkan stres pada ikan.</p>
-                              </div>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-8 h-8 rounded-full bg-ocean flex items-center justify-center text-white relative z-10">3</div>
-                              <div>
-                                <p className="font-medium">Pengolahan</p>
-                                <p className="text-sm text-gray-600">Pengolahan dilakukan dengan standar keamanan pangan tertinggi.</p>
-                              </div>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-8 h-8 rounded-full bg-ocean flex items-center justify-center text-white relative z-10">4</div>
-                              <div>
-                                <p className="font-medium">Distribusi</p>
-                                <p className="text-sm text-gray-600">Produk didistribusikan dengan rantai dingin untuk memastikan kesegaran.</p>
-                              </div>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-8 h-8 rounded-full bg-ocean flex items-center justify-center text-white relative z-10">5</div>
-                              <div>
-                                <p className="font-medium">Toko/Pengiriman</p>
-                                <p className="text-sm text-gray-600">Sampai ke tangan Anda dengan kualitas premium.</p>
-                              </div>
+                            <div>
+                              <p className="font-medium">{stage.title}</p>
+                              <p className="text-sm text-gray-600">{stage.description}</p>
                             </div>
                           </div>
-                        </div>
+                        ))}
                       </div>
-                    </>
-                  ) : (
-                    <p className="text-center text-gray-500">
-                      Kode pelacakan tidak valid. Silakan periksa kembali kode yang Anda masukkan.
-                    </p>
-                  )}
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>

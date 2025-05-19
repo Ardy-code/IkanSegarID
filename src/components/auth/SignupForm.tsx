@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,18 +11,30 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useUser } from "@/contexts/UserContext";
 
 interface SignupFormProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToLogin: () => void;
 }
 
-const SignupForm = ({ isOpen, onClose }: SignupFormProps) => {
-  const handleSubmit = (e: React.FormEvent) => {
+const SignupForm = ({ isOpen, onClose, onSwitchToLogin }: SignupFormProps) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const { signup, isLoading } = useUser();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle registration
-    console.log("Signup form submitted");
-    // For demo purposes, close the dialog
+    await signup({
+      firstName,
+      lastName,
+      email,
+      password
+    });
     onClose();
   };
 
@@ -39,11 +51,22 @@ const SignupForm = ({ isOpen, onClose }: SignupFormProps) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">Nama Depan</Label>
-              <Input id="firstName" placeholder="Nama depan" required />
+              <Input 
+                id="firstName" 
+                placeholder="Nama depan" 
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required 
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="lastName">Nama Belakang</Label>
-              <Input id="lastName" placeholder="Nama belakang" />
+              <Input 
+                id="lastName" 
+                placeholder="Nama belakang" 
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </div>
           </div>
           <div className="space-y-2">
@@ -52,6 +75,8 @@ const SignupForm = ({ isOpen, onClose }: SignupFormProps) => {
               id="email"
               type="email"
               placeholder="nama@contoh.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -62,11 +87,18 @@ const SignupForm = ({ isOpen, onClose }: SignupFormProps) => {
               type="password"
               placeholder="Minimal 8 karakter"
               minLength={8}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           <div className="flex items-center space-x-2">
-            <Checkbox id="terms" required />
+            <Checkbox 
+              id="terms" 
+              checked={termsAccepted}
+              onCheckedChange={(checked) => setTermsAccepted(checked as boolean)}
+              required 
+            />
             <label
               htmlFor="terms"
               className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -81,8 +113,12 @@ const SignupForm = ({ isOpen, onClose }: SignupFormProps) => {
               </a>
             </label>
           </div>
-          <Button type="submit" className="w-full bg-ocean hover:bg-ocean-dark">
-            Daftar
+          <Button 
+            type="submit" 
+            className="w-full bg-ocean hover:bg-ocean-dark"
+            disabled={isLoading || !termsAccepted}
+          >
+            {isLoading ? "Memproses..." : "Daftar"}
           </Button>
           <div className="text-center text-sm">
             Sudah memiliki akun?{" "}
@@ -91,9 +127,8 @@ const SignupForm = ({ isOpen, onClose }: SignupFormProps) => {
               className="font-medium text-ocean hover:text-ocean-dark"
               onClick={(e) => {
                 e.preventDefault();
-                // Handle the switch to login form
-                // For now we just close
                 onClose();
+                onSwitchToLogin();
               }}
             >
               Masuk sekarang

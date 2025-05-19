@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,18 +10,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useUser } from "@/contexts/UserContext";
 
 interface LoginFormProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToSignup: () => void;
 }
 
-const LoginForm = ({ isOpen, onClose }: LoginFormProps) => {
-  const handleSubmit = (e: React.FormEvent) => {
+const LoginForm = ({ isOpen, onClose, onSwitchToSignup }: LoginFormProps) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, isLoading } = useUser();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle authentication
-    console.log("Login form submitted");
-    // For demo purposes, close the dialog
+    await login(email, password);
     onClose();
   };
 
@@ -41,6 +45,8 @@ const LoginForm = ({ isOpen, onClose }: LoginFormProps) => {
               id="email"
               type="email"
               placeholder="nama@contoh.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -54,10 +60,20 @@ const LoginForm = ({ isOpen, onClose }: LoginFormProps) => {
                 Lupa kata sandi?
               </a>
             </div>
-            <Input id="password" type="password" required />
+            <Input 
+              id="password" 
+              type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required 
+            />
           </div>
-          <Button type="submit" className="w-full bg-ocean hover:bg-ocean-dark">
-            Masuk
+          <Button 
+            type="submit" 
+            className="w-full bg-ocean hover:bg-ocean-dark"
+            disabled={isLoading}
+          >
+            {isLoading ? "Memproses..." : "Masuk"}
           </Button>
           <div className="text-center text-sm">
             Belum memiliki akun?{" "}
@@ -66,9 +82,8 @@ const LoginForm = ({ isOpen, onClose }: LoginFormProps) => {
               className="font-medium text-ocean hover:text-ocean-dark"
               onClick={(e) => {
                 e.preventDefault();
-                // Handle the switch to registration form
-                // For now we just close
                 onClose();
+                onSwitchToSignup();
               }}
             >
               Daftar sekarang

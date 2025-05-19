@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useScrollEffect } from "@/hooks/useScrollEffect";
 import Logo from "@/components/navbar/Logo";
@@ -6,50 +5,54 @@ import { NavLinks } from "@/components/navbar/NavLinks";
 import MobileMenuButton from "@/components/navbar/MobileMenuButton";
 import MobileMenu from "@/components/navbar/MobileMenu";
 import AuthButtons from "@/components/navbar/AuthButtons";
+import UserMenu from "@/components/navbar/UserMenu";
+import CartDropdown from "@/components/cart/CartDropdown";
 
 const Navbar = () => {
   const isScrolled = useScrollEffect(50);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white shadow-md py-2"
-          : "bg-transparent py-4"
+    <div
+      className={`fixed w-full z-50 top-0 transition-all duration-300 ${
+        isScrolled || isMenuOpen ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex items-center">
             <Logo />
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex md:items-center md:space-x-6">
+          <div className="hidden md:flex items-center space-x-4">
             <NavLinks />
           </div>
 
-          {/* Login/Register Buttons */}
-          <div className="hidden md:flex md:items-center md:space-x-3">
-            <AuthButtons />
+          <div className="hidden md:flex items-center space-x-2">
+            <CartDropdown />
+            <UserMenu />
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <MobileMenuButton isOpen={isMobileMenuOpen} onClick={toggleMobileMenu} />
+          <div className="md:hidden">
+            <MobileMenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <MobileMenu isOpen={isMobileMenuOpen} />
-    </nav>
+      <MobileMenu isOpen={isMenuOpen}>
+        <NavLinks />
+        <div className="pt-4 pb-1 border-t border-gray-200 flex items-center justify-between">
+          <CartDropdown side="bottom" />
+        </div>
+        <div className="pb-3">
+          <UserMenu isMobile={true} />
+        </div>
+      </MobileMenu>
+    </div>
   );
 };
 
