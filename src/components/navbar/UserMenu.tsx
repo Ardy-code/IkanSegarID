@@ -62,14 +62,6 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
               Pesanan Saya
             </Button>
           </Link>
-          <Link to="/wishlist" className="w-full block">
-            <Button 
-              variant="outline" 
-              className="w-full mb-2"
-            >
-              Wishlist
-            </Button>
-          </Link>
           <Button 
             variant="destructive" 
             className="w-full"
@@ -103,11 +95,6 @@ const UserMenu = ({ isMobile = false }: UserMenuProps) => {
             <Link to="/orders">
               <DropdownMenuItem className="cursor-pointer">
                 Pesanan Saya
-              </DropdownMenuItem>
-            </Link>
-            <Link to="/wishlist">
-              <DropdownMenuItem className="cursor-pointer">
-                Wishlist
               </DropdownMenuItem>
             </Link>
             <DropdownMenuSeparator />
