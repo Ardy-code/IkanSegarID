@@ -11,16 +11,22 @@ import { useCart } from "@/contexts/CartContext";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
-interface CheckoutFormValues {
-  fullName: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  zipCode: string;
-  paymentMethod: "bank_transfer" | "credit_card" | "cod";
-}
+const checkoutSchema = z.object({
+  fullName: z.string().min(1, "Nama lengkap harus diisi"),
+  email: z.string().email("Email tidak valid"),
+  phone: z.string().min(8, "Nomor telepon tidak valid"),
+  address: z.string().min(1, "Alamat harus diisi"),
+  city: z.string().min(1, "Kota harus diisi"),
+  zipCode: z.string().min(5, "Kode pos tidak valid"),
+  paymentMethod: z.enum(["bank_transfer", "credit_card", "cod"], {
+    required_error: "Metode pembayaran harus dipilih",
+  }),
+});
+
+type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
 const Checkout = () => {
   const { items, total, clearCart } = useCart();
@@ -28,6 +34,7 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const form = useForm<CheckoutFormValues>({
+    resolver: zodResolver(checkoutSchema),
     defaultValues: {
       fullName: "",
       email: "",
@@ -146,7 +153,7 @@ const Checkout = () => {
                         name="fullName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Nama Lengkap</FormLabel>
+                            <FormLabel>Nama Lengkap *</FormLabel>
                             <FormControl>
                               <Input placeholder="Nama lengkap" {...field} />
                             </FormControl>
@@ -160,7 +167,7 @@ const Checkout = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>Email *</FormLabel>
                             <FormControl>
                               <Input type="email" placeholder="email@example.com" {...field} />
                             </FormControl>
@@ -175,7 +182,7 @@ const Checkout = () => {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nomor Telepon</FormLabel>
+                          <FormLabel>Nomor Telepon *</FormLabel>
                           <FormControl>
                             <Input placeholder="0812XXXXXXXX" {...field} />
                           </FormControl>
@@ -189,7 +196,7 @@ const Checkout = () => {
                       name="address"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Alamat</FormLabel>
+                          <FormLabel>Alamat *</FormLabel>
                           <FormControl>
                             <Input placeholder="Alamat lengkap" {...field} />
                           </FormControl>
@@ -204,7 +211,7 @@ const Checkout = () => {
                         name="city"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Kota</FormLabel>
+                            <FormLabel>Kota *</FormLabel>
                             <FormControl>
                               <Input placeholder="Nama kota" {...field} />
                             </FormControl>
@@ -218,7 +225,7 @@ const Checkout = () => {
                         name="zipCode"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Kode Pos</FormLabel>
+                            <FormLabel>Kode Pos *</FormLabel>
                             <FormControl>
                               <Input placeholder="12345" {...field} />
                             </FormControl>
