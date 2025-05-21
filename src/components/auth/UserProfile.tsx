@@ -24,7 +24,6 @@ const UserProfile = ({ isOpen, onClose }: UserProfileProps) => {
   const { user, updateProfile } = useUser();
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastName] = useState(user?.lastName || "");
-  const [email, setEmail] = useState(user?.email || "");
   const [isUpdating, setIsUpdating] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +38,6 @@ const UserProfile = ({ isOpen, onClose }: UserProfileProps) => {
       await updateProfile({
         firstName,
         lastName,
-        email,
         avatar: avatarPreview || user?.avatar,
       });
       toast.success("Profil berhasil diperbarui");
@@ -132,18 +130,6 @@ const UserProfile = ({ isOpen, onClose }: UserProfileProps) => {
                 placeholder="Nama belakang" 
               />
             </div>
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input 
-              id="email" 
-              type="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="nama@contoh.com"
-              required 
-            />
           </div>
           
           <Button 
