@@ -30,13 +30,21 @@ const CartItem = ({ item }: CartItemProps) => {
     }
   };
 
+  const getFallbackImage = () => {
+    return "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=500&auto=format&fit=crop&q=80";
+  };
+
   return (
     <div className="flex gap-4 py-4 border-b">
       <div className="w-20 h-20 bg-gray-100 rounded overflow-hidden pointer-events-none">
         <img
-          src={item.image}
+          src={item.image || getFallbackImage()}
           alt={item.name}
           className="w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = getFallbackImage();
+          }}
         />
       </div>
       

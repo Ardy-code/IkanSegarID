@@ -1,9 +1,12 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Verified, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { formatPrice } from "@/lib/utils";
+import { useUser } from "@/contexts/UserContext";
+import { toast } from "sonner";
 
 interface Product {
   id: string;
@@ -20,6 +23,7 @@ interface FeaturedProductsProps {
 
 export const FeaturedProducts = ({ fullCatalog = false }: FeaturedProductsProps) => {
   const { addToCart } = useCart();
+  const { user } = useUser();
   
   const allProducts: Product[] = [
     {
@@ -92,6 +96,11 @@ export const FeaturedProducts = ({ fullCatalog = false }: FeaturedProductsProps)
   const products = fullCatalog ? allProducts : allProducts.slice(0, 4);
 
   const handleAddToCart = (product: Product) => {
+    if (!user) {
+      toast.error("Silakan masuk untuk menambahkan produk ke keranjang");
+      return;
+    }
+    
     addToCart({
       id: product.id,
       name: product.name,
@@ -99,6 +108,10 @@ export const FeaturedProducts = ({ fullCatalog = false }: FeaturedProductsProps)
       image: product.image,
       farmer: product.farmer
     });
+  };
+
+  const getFallbackImage = () => {
+    return "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=500&auto=format&fit=crop&q=80";
   };
 
   return (
@@ -121,11 +134,10 @@ export const FeaturedProducts = ({ fullCatalog = false }: FeaturedProductsProps)
               className="card opacity-0 animate-fade-in rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-all"
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
-              {/* Image is no longer wrapped in a Link and has pointer-events-none to prevent clicking */}
               <div 
                 className="h-48 bg-gray-200 relative pointer-events-none"
                 style={{
-                  backgroundImage: `url('${product.image}')`,
+                  backgroundImage: `url('${product.image || getFallbackImage()}')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center"
                 }}
