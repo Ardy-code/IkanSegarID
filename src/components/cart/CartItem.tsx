@@ -32,7 +32,7 @@ const CartItem = ({ item }: CartItemProps) => {
 
   return (
     <div className="flex gap-4 py-4 border-b">
-      <div className="w-20 h-20 bg-gray-100 rounded overflow-hidden">
+      <div className="w-20 h-20 bg-gray-100 rounded overflow-hidden pointer-events-none">
         <img
           src={item.image}
           alt={item.name}

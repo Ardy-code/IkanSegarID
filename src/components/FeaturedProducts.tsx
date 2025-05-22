@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Verified, ShoppingCart } from "lucide-react";
@@ -122,23 +121,22 @@ export const FeaturedProducts = ({ fullCatalog = false }: FeaturedProductsProps)
               className="card opacity-0 animate-fade-in rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-all"
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
-              <Link to={`/products/${product.id}`} className="block">
-                <div 
-                  className="h-48 bg-gray-200 relative"
-                  style={{
-                    backgroundImage: `url('${product.image}')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center"
-                  }}
-                >
-                  <div className="absolute top-3 right-3">
-                    <div className="bg-white/90 text-green-600 rounded-full px-2 py-1 text-xs font-medium flex items-center space-x-1">
-                      <Verified className="h-3 w-3" />
-                      <span>Terverifikasi</span>
-                    </div>
+              {/* Image is no longer wrapped in a Link and has pointer-events-none to prevent clicking */}
+              <div 
+                className="h-48 bg-gray-200 relative pointer-events-none"
+                style={{
+                  backgroundImage: `url('${product.image}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center"
+                }}
+              >
+                <div className="absolute top-3 right-3">
+                  <div className="bg-white/90 text-green-600 rounded-full px-2 py-1 text-xs font-medium flex items-center space-x-1">
+                    <Verified className="h-3 w-3" />
+                    <span>Terverifikasi</span>
                   </div>
                 </div>
-              </Link>
+              </div>
               <div className="p-4">
                 <Link to={`/products/${product.id}`} className="block">
                   <h3 className="font-bold text-lg mb-2 hover:text-ocean">{product.name}</h3>

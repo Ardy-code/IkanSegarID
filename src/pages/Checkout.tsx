@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -105,7 +104,7 @@ const Checkout = () => {
                 <div className="divide-y">
                   {items.map(item => (
                     <div key={item.id} className="py-3 flex gap-3">
-                      <div className="w-16 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                      <div className="w-16 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0 pointer-events-none">
                         <img
                           src={item.image}
                           alt={item.name}
