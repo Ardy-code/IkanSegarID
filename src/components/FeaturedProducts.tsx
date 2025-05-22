@@ -162,11 +162,8 @@ export const FeaturedProducts = ({
                 </div>
               </div>
               <div className="p-4">
-                <Link to={`/products/${product.id}`} className="block">
-                  <h3 className="font-bold text-lg mb-2 hover:text-ocean">
-                    {product.name}
-                  </h3>
-                </Link>
+                <h3 className="font-bold text-lg mb-2">{product.name}</h3>
+
                 <p className="text-gray-500 text-sm mb-3">
                   Oleh {product.farmer} • {product.location}
                 </p>
