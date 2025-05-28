@@ -8,6 +8,8 @@ import { UserProvider } from "./contexts/UserContext";
 import { CartProvider } from "./contexts/CartContext";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
+import SellProducts from "./pages/SellProducts";
+import CreateRecipe from "./pages/CreateRecipe";
 import FishTraceability from "./pages/FishTraceability";
 import Recipes from "./pages/Recipes";
 import Checkout from "./pages/Checkout";
@@ -27,6 +29,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/sell-products" element={<SellProducts />} />
+              <Route path="/create-recipe" element={<CreateRecipe />} />
               <Route path="/fish-traceability" element={<FishTraceability />} />
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/checkout" element={<Checkout />} />

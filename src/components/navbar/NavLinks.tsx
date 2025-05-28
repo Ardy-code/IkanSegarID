@@ -47,6 +47,8 @@ export const NavLinks = () => {
     <>
       <NavLink href="/">Beranda</NavLink>
       <NavLink href="/products">Produk</NavLink>
+      <NavLink href="/sell-products">Jual Produk</NavLink>
+      <NavLink href="/create-recipe">Buat Resep</NavLink>
       <NavLink href="/fish-traceability">Lacak Ikan</NavLink>
       <NavLink href="/recipes">Resep</NavLink>
       <NavLink href="#about">Tentang Kami</NavLink>
