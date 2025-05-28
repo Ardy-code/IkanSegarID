@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useUser } from "@/contexts/UserContext";
+import { useUserContent } from "@/contexts/UserContentContext";
 import { toast } from "sonner";
 import { ChefHat, Plus, Minus } from "lucide-react";
 
 const CreateRecipe = () => {
   const { user } = useUser();
+  const { addRecipe } = useUserContent();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -66,8 +68,21 @@ const CreateRecipe = () => {
       return;
     }
     
-    // Here you would typically send the data to your backend
-    toast.success("Resep berhasil dibuat!");
+    // Add recipe to user content
+    addRecipe({
+      title: formData.title,
+      description: formData.description,
+      prepTime: Number(formData.prepTime),
+      cookTime: Number(formData.cookTime),
+      servings: Number(formData.servings),
+      difficulty: formData.difficulty,
+      image: formData.image || "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&h=300&fit=crop",
+      ingredients: ingredients.filter(ing => ing.trim() !== ""),
+      instructions: instructions.filter(inst => inst.trim() !== ""),
+      userId: user.id
+    });
+    
+    toast.success("Resep berhasil dibuat dan akan muncul di halaman resep!");
     
     // Reset form
     setFormData({
@@ -114,7 +129,7 @@ const CreateRecipe = () => {
               Buat Resep Ikan Favorit Anda
             </h1>
             <p className="text-xl text-gray-600">
-              Bagikan kreasi kuliner ikan Anda dengan komunitas FishFreshID
+              Bagikan kreasi kuliner ikan Anda dengan komunitas IkanSegarID
             </p>
           </div>
 

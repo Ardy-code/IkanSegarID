@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useUser } from "@/contexts/UserContext";
+import { useUserContent } from "@/contexts/UserContentContext";
 import { toast } from "sonner";
 import { Upload, Plus } from "lucide-react";
 
 const SellProducts = () => {
   const { user } = useUser();
+  const { addProduct } = useUserContent();
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -34,8 +36,18 @@ const SellProducts = () => {
       return;
     }
     
-    // Here you would typically send the data to your backend
-    toast.success("Produk berhasil ditambahkan untuk review!");
+    // Add product to user content
+    addProduct({
+      name: formData.name,
+      price: Number(formData.price),
+      description: formData.description,
+      location: formData.location,
+      category: formData.category,
+      image: formData.image || "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=300&fit=crop",
+      userId: user.id
+    });
+    
+    toast.success("Produk berhasil ditambahkan dan akan muncul di halaman produk!");
     setFormData({
       name: "",
       price: "",
@@ -77,7 +89,7 @@ const SellProducts = () => {
               Jual Produk Ikan Anda
             </h1>
             <p className="text-xl text-gray-600">
-              Bergabunglah dengan komunitas penjual ikan segar FishFreshID
+              Bergabunglah dengan komunitas penjual ikan segar IkanSegarID
             </p>
           </div>
 
@@ -165,7 +177,7 @@ const SellProducts = () => {
 
                 <Button type="submit" className="w-full bg-ocean hover:bg-ocean-dark">
                   <Upload className="h-4 w-4 mr-2" />
-                  Kirim untuk Review
+                  Tambah Produk
                 </Button>
               </form>
             </CardContent>

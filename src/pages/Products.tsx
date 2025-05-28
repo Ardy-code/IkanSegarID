@@ -1,7 +1,9 @@
+
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FeaturedProducts } from "@/components/FeaturedProducts";
+import UserProductGrid from "@/components/UserProductGrid";
 
 const Products = () => {
   return (
@@ -12,6 +14,7 @@ const Products = () => {
           <h1 className="text-4xl font-bold text-center mb-12">
             Katalog Produk
           </h1>
+          <UserProductGrid />
           <FeaturedProducts fullCatalog={true} />
         </div>
       </div>
