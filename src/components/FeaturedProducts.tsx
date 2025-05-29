@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Verified, ShoppingCart } from "lucide-react";
@@ -14,11 +15,18 @@ interface Product {
   image: string;
   farmer: string;
   location: string;
+  trackingCode?: string;
 }
 
 interface FeaturedProductsProps {
   fullCatalog?: boolean;
 }
+
+const generateTrackingCode = (productId: string) => {
+  const timestamp = Date.now().toString().slice(-6);
+  const productCode = productId.toUpperCase().slice(-3);
+  return `FISH${timestamp}${productCode}`;
+};
 
 export const FeaturedProducts = ({
   fullCatalog = false,
@@ -35,6 +43,7 @@ export const FeaturedProducts = ({
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFhqarf-YcRhUdVaqN_4CJvF91bAMWrmBqjQ&s",
       farmer: "Peternakan Lembah Hijau",
       location: "Springfield, OR",
+      trackingCode: generateTrackingCode("trout-001")
     },
     {
       id: "tilapia-002",
@@ -44,6 +53,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1594044534949-28737ddc9e94?w=500&auto=format&fit=crop&q=80",
       farmer: "Budidaya Sungai Biru",
       location: "Portland, OR",
+      trackingCode: generateTrackingCode("tilapia-002")
     },
     {
       id: "catfish-003",
@@ -53,6 +63,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1565529197662-af732fb4a1ff?w=500&auto=format&fit=crop&q=80",
       farmer: "Peternakan Riverside",
       location: "Eugene, OR",
+      trackingCode: generateTrackingCode("catfish-003")
     },
     {
       id: "salmon-004",
@@ -62,6 +73,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&auto=format&fit=crop&q=80",
       farmer: "Perikanan Arus Gunung",
       location: "Bend, OR",
+      trackingCode: generateTrackingCode("salmon-004")
     },
     {
       id: "carp-005",
@@ -71,6 +83,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1611704067869-5af327381cac?w=500&auto=format&fit=crop&q=80",
       farmer: "Kolam Ikan Sejahtera",
       location: "Banda Aceh, ID",
+      trackingCode: generateTrackingCode("carp-005")
     },
     {
       id: "seabass-006",
@@ -80,6 +93,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1573093092871-46ef4ab2b52c?w=500&auto=format&fit=crop&q=80",
       farmer: "Peternakan Laut Biru",
       location: "Bali, ID",
+      trackingCode: generateTrackingCode("seabass-006")
     },
     {
       id: "tuna-007",
@@ -89,6 +103,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1544551763-92ab472cad5f?w=500&auto=format&fit=crop&q=80",
       farmer: "Nelayan Samudera",
       location: "Ambon, ID",
+      trackingCode: generateTrackingCode("tuna-007")
     },
     {
       id: "cod-008",
@@ -98,6 +113,7 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1559376767-54104ae6eb97?w=500&auto=format&fit=crop&q=80",
       farmer: "Peternakan Teluk Biru",
       location: "Manado, ID",
+      trackingCode: generateTrackingCode("cod-008")
     },
   ];
 
@@ -160,6 +176,11 @@ export const FeaturedProducts = ({
                     <span>Terverifikasi</span>
                   </div>
                 </div>
+                {product.trackingCode && (
+                  <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                    {product.trackingCode}
+                  </div>
+                )}
               </div>
               <div className="p-4">
                 <h3 className="font-bold text-lg mb-2">{product.name}</h3>

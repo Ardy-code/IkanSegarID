@@ -1,18 +1,24 @@
 
 import React from "react";
 import { useUserContent } from "@/contexts/UserContentContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { MapPin, Plus } from "lucide-react";
+import { Verified, ShoppingCart, MapPin } from "lucide-react";
 import { toast } from "sonner";
+import { formatPrice } from "@/lib/utils";
+import { useUser } from "@/contexts/UserContext";
 
 const UserProductGrid = () => {
   const { userProducts } = useUserContent();
   const { addToCart } = useCart();
+  const { user } = useUser();
 
   const handleAddToCart = (product: any) => {
+    if (!user) {
+      toast.error("Silakan masuk untuk menambahkan produk ke keranjang");
+      return;
+    }
+
     addToCart({
       id: product.id,
       name: product.name,
@@ -21,6 +27,10 @@ const UserProductGrid = () => {
       farmer: product.farmer
     });
     toast.success(`${product.name} telah ditambahkan ke keranjang!`);
+  };
+
+  const getFallbackImage = () => {
+    return "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=500&auto=format&fit=crop&q=80";
   };
 
   if (userProducts.length === 0) {
@@ -34,52 +44,53 @@ const UserProductGrid = () => {
         <p className="text-gray-600">Produk segar yang dijual langsung oleh anggota komunitas IkanSegarID</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {userProducts.map((product) => (
-          <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-            <div className="aspect-square relative overflow-hidden">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-              <Badge className="absolute top-2 right-2 bg-green-500">
-                Komunitas
-              </Badge>
-            </div>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg">{product.name}</CardTitle>
-              <Badge variant="outline" className="w-fit">{product.category}</Badge>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
-              
-              <div className="flex items-center text-sm text-gray-500 mb-3">
-                <MapPin className="h-4 w-4 mr-1" />
-                {product.location}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {userProducts.map((product, index) => (
+          <div
+            key={product.id}
+            className="card opacity-0 animate-fade-in rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-all"
+            style={{ animationDelay: `${(index + 1) * 100}ms` }}
+          >
+            <div
+              className="h-48 bg-gray-200 relative pointer-events-none"
+              style={{
+                backgroundImage: `url('${product.image || getFallbackImage()}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="absolute top-3 right-3">
+                <div className="bg-white/90 text-green-600 rounded-full px-2 py-1 text-xs font-medium flex items-center space-x-1">
+                  <Verified className="h-3 w-3" />
+                  <span>Komunitas</span>
+                </div>
               </div>
-              
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-2xl font-bold text-ocean">
-                  Rp {product.price.toLocaleString('id-ID')}
-                </span>
-                <Button
-                  size="sm"
-                  onClick={() => handleAddToCart(product)}
-                  className="bg-ocean hover:bg-ocean-dark"
-                >
-                  <Plus className="h-4 w-4 mr-1" />
-                  Beli
-                </Button>
-              </div>
-              
               {product.trackingCode && (
-                <div className="text-xs text-gray-500 bg-gray-100 p-2 rounded">
-                  <span className="font-medium">Kode Lacak:</span> {product.trackingCode}
+                <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                  {product.trackingCode}
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+            <div className="p-4">
+              <h3 className="font-bold text-lg mb-2">{product.name}</h3>
+              <p className="text-gray-500 text-sm mb-3">
+                Oleh {product.farmer} • {product.location}
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-lg">
+                  {formatPrice(product.price)}
+                </span>
+                <Button
+                  variant="outline"
+                  className="hover:bg-ocean hover:text-white"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  <ShoppingCart className="h-4 w-4 mr-1" />
+                  Tambah
+                </Button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </div>
