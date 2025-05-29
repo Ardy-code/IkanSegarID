@@ -17,7 +17,8 @@ const UserProductGrid = () => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image
+      image: product.image,
+      farmer: product.farmer
     });
     toast.success(`${product.name} telah ditambahkan ke keranjang!`);
   };

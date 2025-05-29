@@ -21,7 +21,8 @@ const SellProducts = () => {
     description: "",
     location: "",
     category: "",
-    image: ""
+    image: "",
+    farmer: ""
   });
   const [lastCreatedProduct, setLastCreatedProduct] = useState<string | null>(null);
 
@@ -45,7 +46,8 @@ const SellProducts = () => {
       location: formData.location,
       category: formData.category,
       image: formData.image || "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=300&fit=crop",
-      userId: user.id
+      userId: user.id,
+      farmer: formData.farmer || user.name || "Penjual Komunitas"
     });
     
     // Generate tracking code for display
@@ -61,7 +63,8 @@ const SellProducts = () => {
       description: "",
       location: "",
       category: "",
-      image: ""
+      image: "",
+      farmer: ""
     });
   };
 
@@ -135,6 +138,17 @@ const SellProducts = () => {
                     onChange={handleInputChange}
                     placeholder="Contoh: Ikan Salmon Segar"
                     required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="farmer">Nama Penjual</Label>
+                  <Input
+                    id="farmer"
+                    name="farmer"
+                    value={formData.farmer}
+                    onChange={handleInputChange}
+                    placeholder="Nama Anda atau nama usaha"
                   />
                 </div>
 

@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 export interface UserProduct {
@@ -12,6 +11,7 @@ export interface UserProduct {
   userId: string;
   createdAt: string;
   trackingCode: string;
+  farmer: string;
 }
 
 export interface UserRecipe {
