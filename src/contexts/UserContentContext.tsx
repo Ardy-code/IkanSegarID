@@ -11,6 +11,7 @@ export interface UserProduct {
   image: string;
   userId: string;
   createdAt: string;
+  trackingCode: string;
 }
 
 export interface UserRecipe {
@@ -31,11 +32,18 @@ export interface UserRecipe {
 interface UserContentContextType {
   userProducts: UserProduct[];
   userRecipes: UserRecipe[];
-  addProduct: (product: Omit<UserProduct, 'id' | 'createdAt'>) => void;
+  addProduct: (product: Omit<UserProduct, 'id' | 'createdAt' | 'trackingCode'>) => void;
   addRecipe: (recipe: Omit<UserRecipe, 'id' | 'createdAt'>) => void;
+  getProductByTrackingCode: (trackingCode: string) => UserProduct | null;
 }
 
 const UserContentContext = createContext<UserContentContextType | undefined>(undefined);
+
+const generateTrackingCode = () => {
+  const timestamp = Date.now().toString().slice(-6);
+  const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+  return `FISH${timestamp}${random}`;
+};
 
 export const UserContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userProducts, setUserProducts] = useState<UserProduct[]>([]);
@@ -55,11 +63,12 @@ export const UserContentProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   }, []);
 
-  const addProduct = (productData: Omit<UserProduct, 'id' | 'createdAt'>) => {
+  const addProduct = (productData: Omit<UserProduct, 'id' | 'createdAt' | 'trackingCode'>) => {
     const newProduct: UserProduct = {
       ...productData,
       id: `product-${Date.now()}`,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      trackingCode: generateTrackingCode()
     };
     
     const updatedProducts = [...userProducts, newProduct];
@@ -79,8 +88,12 @@ export const UserContentProvider: React.FC<{ children: React.ReactNode }> = ({ c
     localStorage.setItem("userRecipes", JSON.stringify(updatedRecipes));
   };
 
+  const getProductByTrackingCode = (trackingCode: string): UserProduct | null => {
+    return userProducts.find(product => product.trackingCode === trackingCode) || null;
+  };
+
   return (
-    <UserContentContext.Provider value={{ userProducts, userRecipes, addProduct, addRecipe }}>
+    <UserContentContext.Provider value={{ userProducts, userRecipes, addProduct, addRecipe, getProductByTrackingCode }}>
       {children}
     </UserContentContext.Provider>
   );

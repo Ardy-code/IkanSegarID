@@ -23,6 +23,7 @@ const SellProducts = () => {
     category: "",
     image: ""
   });
+  const [lastCreatedProduct, setLastCreatedProduct] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -46,6 +47,12 @@ const SellProducts = () => {
       image: formData.image || "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=300&fit=crop",
       userId: user.id
     });
+    
+    // Generate tracking code for display
+    const timestamp = Date.now().toString().slice(-6);
+    const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+    const trackingCode = `FISH${timestamp}${random}`;
+    setLastCreatedProduct(trackingCode);
     
     toast.success("Produk berhasil ditambahkan dan akan muncul di halaman produk!");
     setFormData({
@@ -92,6 +99,23 @@ const SellProducts = () => {
               Bergabunglah dengan komunitas penjual ikan segar IkanSegarID
             </p>
           </div>
+
+          {lastCreatedProduct && (
+            <Card className="max-w-2xl mx-auto mb-6 bg-green-50 border-green-200">
+              <CardContent className="pt-6">
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-green-800 mb-2">Produk Berhasil Ditambahkan!</h3>
+                  <p className="text-green-700 mb-2">Kode pelacakan untuk produk Anda:</p>
+                  <div className="bg-white p-3 rounded-lg border border-green-300">
+                    <code className="text-lg font-mono text-green-800">{lastCreatedProduct}</code>
+                  </div>
+                  <p className="text-sm text-green-600 mt-2">
+                    Kode ini dapat digunakan pelanggan untuk melacak produk Anda di halaman "Lacak Ikan"
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           <Card className="max-w-2xl mx-auto">
             <CardHeader>

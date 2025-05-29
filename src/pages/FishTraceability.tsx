@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import TracingTutorial from "@/components/TracingTutorial";
+import { useUserContent } from "@/contexts/UserContentContext";
 import { toast } from "sonner";
 
 interface TrackingResult {
@@ -113,8 +114,10 @@ const getTrackingData = (code: string): TrackingResult | null => {
 const FishTraceability = () => {
   const [trackingCode, setTrackingCode] = useState("");
   const [result, setResult] = useState<TrackingResult | null>(null);
+  const [userProduct, setUserProduct] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const { getProductByTrackingCode } = useUserContent();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,14 +132,26 @@ const FishTraceability = () => {
 
     // Simulate API call
     setTimeout(() => {
-      const data = getTrackingData(trackingCode);
+      // First check user products
+      const userProd = getProductByTrackingCode(trackingCode);
       
-      if (data) {
-        setResult(data);
-        toast.success("Data pelacakan berhasil ditemukan!");
-      } else {
+      if (userProd) {
+        setUserProduct(userProd);
         setResult(null);
-        toast.error("Kode pelacakan tidak ditemukan. Coba gunakan FISH123 untuk contoh.");
+        toast.success("Produk komunitas ditemukan!");
+      } else {
+        // Check predefined tracking codes
+        const data = getTrackingData(trackingCode);
+        
+        if (data) {
+          setResult(data);
+          setUserProduct(null);
+          toast.success("Data pelacakan berhasil ditemukan!");
+        } else {
+          setResult(null);
+          setUserProduct(null);
+          toast.error("Kode pelacakan tidak ditemukan. Coba gunakan FISH123 untuk contoh.");
+        }
       }
       
       setIsLoading(false);
@@ -190,6 +205,41 @@ const FishTraceability = () => {
               </form>
             </CardContent>
           </Card>
+
+          {userProduct && (
+            <Card className="animate-fade-in mb-8">
+              <CardHeader>
+                <CardTitle>Produk Komunitas Ditemukan</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <img 
+                      src={userProduct.image} 
+                      alt={userProduct.name}
+                      className="w-full h-48 object-cover rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">{userProduct.name}</h3>
+                    <p className="text-gray-600 mb-4">{userProduct.description}</p>
+                    <div className="space-y-2">
+                      <p><span className="font-medium">Kategori:</span> {userProduct.category}</p>
+                      <p><span className="font-medium">Lokasi:</span> {userProduct.location}</p>
+                      <p><span className="font-medium">Harga:</span> Rp {userProduct.price.toLocaleString('id-ID')}</p>
+                      <p><span className="font-medium">Tanggal Upload:</span> {new Date(userProduct.createdAt).toLocaleDateString('id-ID')}</p>
+                      <p><span className="font-medium">Kode Pelacakan:</span> {userProduct.trackingCode}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-green-50 rounded-lg">
+                  <p className="text-green-800 text-sm">
+                    Ini adalah produk yang dijual oleh anggota komunitas IkanSegarID. Produk ini telah melalui verifikasi dasar platform kami.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {result && (
             <Card className="animate-fade-in">

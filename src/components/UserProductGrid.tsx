@@ -17,8 +17,7 @@ const UserProductGrid = () => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
-      quantity: 1
+      image: product.image
     });
     toast.success(`${product.name} telah ditambahkan ke keranjang!`);
   };
@@ -59,7 +58,7 @@ const UserProductGrid = () => {
                 {product.location}
               </div>
               
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl font-bold text-ocean">
                   Rp {product.price.toLocaleString('id-ID')}
                 </span>
@@ -72,6 +71,12 @@ const UserProductGrid = () => {
                   Beli
                 </Button>
               </div>
+              
+              {product.trackingCode && (
+                <div className="text-xs text-gray-500 bg-gray-100 p-2 rounded">
+                  <span className="font-medium">Kode Lacak:</span> {product.trackingCode}
+                </div>
+              )}
             </CardContent>
           </Card>
         ))}
