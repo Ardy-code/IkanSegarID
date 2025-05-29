@@ -47,7 +47,7 @@ const SellProducts = () => {
       category: formData.category,
       image: formData.image || "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=300&fit=crop",
       userId: user.id,
-      farmer: formData.farmer || user.name || "Penjual Komunitas"
+      farmer: formData.farmer || `${user.firstName} ${user.lastName}`.trim() || "Penjual Komunitas"
     });
     
     // Generate tracking code for display
