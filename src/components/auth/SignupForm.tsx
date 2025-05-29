@@ -44,7 +44,7 @@ const SignupForm = ({ isOpen, onClose, onSwitchToLogin }: SignupFormProps) => {
         <DialogHeader>
           <DialogTitle className="text-2xl">Buat Akun Baru</DialogTitle>
           <DialogDescription>
-            Daftar untuk menikmati semua fitur Aquaharvest
+            Daftar untuk menikmati semua fitur IkanSegarID
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">

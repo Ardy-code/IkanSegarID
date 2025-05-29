@@ -19,7 +19,7 @@ const Testimonials = () => {
       type: "customer"
     },
     {
-      quote: "Bermitra dengan Aquaharvest telah mengubah peternakan kecil saya. Platform mereka menghubungkan saya langsung dengan orang-orang yang menghargai keberlanjutan dan kualitas.",
+      quote: "Bermitra dengan IkanSegarID telah mengubah peternakan kecil saya. Platform mereka menghubungkan saya langsung dengan orang-orang yang menghargai keberlanjutan dan kualitas.",
       name: "Robert Chen",
       role: "Peternak Ikan, Budidaya Sungai Biru",
       image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&auto=format&fit=crop&q=60",

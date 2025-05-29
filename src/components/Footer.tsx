@@ -23,7 +23,7 @@ const Footer = () => {
             <div className="flex items-center mb-6">
               <Fish className="h-8 w-8 text-ocean-light" />
               <span className="font-bold text-2xl ml-2">
-                Aqua<span className="text-ocean-light">harvest</span>
+                Ikan<span className="text-ocean-light">SegarID</span>
               </span>
             </div>
             <p className="text-gray-400 mb-6">
@@ -93,7 +93,7 @@ const Footer = () => {
           <div id="about">
             <h3 className="font-bold text-lg mb-4">Tentang Kami</h3>
             <p className="text-gray-400 mb-4">
-              Aquaharvest didirikan pada tahun 2018 dengan misi untuk menghubungkan konsumen langsung dengan peternak ikan air tawar yang berkualitas.
+              IkanSegarID didirikan pada tahun 2018 dengan misi untuk menghubungkan konsumen langsung dengan peternak ikan air tawar yang berkualitas.
             </p>
             <p className="text-gray-400">
               Kami berkomitmen untuk mendorong praktik perikanan berkelanjutan dan menyediakan makanan laut berkualitas tertinggi dengan transparansi penuh.
@@ -121,7 +121,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Aquaharvest. Hak cipta dilindungi.
+            © {new Date().getFullYear()} IkanSegarID. Hak cipta dilindungi.
           </p>
           <div className="flex space-x-6 text-sm text-gray-500">
             <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
@@ -156,8 +156,8 @@ const Footer = () => {
               </svg>
               <div>
                 <p className="font-medium">Email</p>
-                <a href="mailto:info@aquaharvest.id" className="text-ocean hover:underline">
-                  info@aquaharvest.id
+                <a href="mailto:info@ikansegarid.id" className="text-ocean hover:underline">
+                  info@ikansegarid.id
                 </a>
               </div>
             </div>
