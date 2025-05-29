@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Verified, ShoppingCart } from "lucide-react";
@@ -43,27 +42,27 @@ export const FeaturedProducts = ({
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFhqarf-YcRhUdVaqN_4CJvF91bAMWrmBqjQ&s",
       farmer: "Peternakan Lembah Hijau",
       location: "Springfield, OR",
-      trackingCode: generateTrackingCode("trout-001")
+      trackingCode: generateTrackingCode("trout-001"),
     },
     {
       id: "tilapia-002",
       name: "Ikan Tilapia Segar",
       price: 9.99 * 15000,
       image:
-        "https://images.unsplash.com/photo-1594044534949-28737ddc9e94?w=500&auto=format&fit=crop&q=80",
+        "https://media.istockphoto.com/id/157648993/id/foto/ikan-tilapia.jpg?s=612x612&w=0&k=20&c=72O_du3_1_Vmj4BIWiZ-KIvb0IAAh3okSl4sZstyS1s=",
       farmer: "Budidaya Sungai Biru",
       location: "Portland, OR",
-      trackingCode: generateTrackingCode("tilapia-002")
+      trackingCode: generateTrackingCode("tilapia-002"),
     },
     {
       id: "catfish-003",
       name: "Fillet Ikan Lele",
       price: 10.99 * 15000,
       image:
-        "https://images.unsplash.com/photo-1565529197662-af732fb4a1ff?w=500&auto=format&fit=crop&q=80",
+        "https://media.istockphoto.com/id/1056323190/id/foto/fillet-segar-pangasius.jpg?s=612x612&w=0&k=20&c=8X83s6mzIsL4uC6vzF9EnjCFdVjDiqVJTwkr0hITuvs=",
       farmer: "Peternakan Riverside",
       location: "Eugene, OR",
-      trackingCode: generateTrackingCode("catfish-003")
+      trackingCode: generateTrackingCode("catfish-003"),
     },
     {
       id: "salmon-004",
@@ -73,47 +72,47 @@ export const FeaturedProducts = ({
         "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&auto=format&fit=crop&q=80",
       farmer: "Perikanan Arus Gunung",
       location: "Bend, OR",
-      trackingCode: generateTrackingCode("salmon-004")
+      trackingCode: generateTrackingCode("salmon-004"),
     },
     {
       id: "carp-005",
-      name: "Ikan Mas Segar",
+      name: "Nila fillet",
       price: 8.99 * 15000,
       image:
-        "https://images.unsplash.com/photo-1611704067869-5af327381cac?w=500&auto=format&fit=crop&q=80",
+        "https://media.istockphoto.com/id/914601894/id/foto/fillet-ikan-segar-di-papan-kayu.jpg?s=612x612&w=0&k=20&c=YZgkEjTDSojYyal5OWpmOPv5iDIOMqtZvnRg91FqufQ=",
       farmer: "Kolam Ikan Sejahtera",
       location: "Banda Aceh, ID",
-      trackingCode: generateTrackingCode("carp-005")
+      trackingCode: generateTrackingCode("carp-005"),
     },
     {
       id: "seabass-006",
       name: "Kakap Putih Premium",
       price: 18.99 * 15000,
       image:
-        "https://images.unsplash.com/photo-1573093092871-46ef4ab2b52c?w=500&auto=format&fit=crop&q=80",
+        "https://media.istockphoto.com/id/506914139/id/foto/fillet-bertengger-laut.jpg?s=612x612&w=0&k=20&c=ZQJe-sAQ-OrTiz6QmYGUEtDJorPWYv4mBh_LLtaikIo=",
       farmer: "Peternakan Laut Biru",
       location: "Bali, ID",
-      trackingCode: generateTrackingCode("seabass-006")
+      trackingCode: generateTrackingCode("seabass-006"),
     },
     {
       id: "tuna-007",
-      name: "Tuna Sirip Kuning",
+      name: "Tuna Sirip Kuning fillet",
       price: 22.99 * 15000,
       image:
-        "https://images.unsplash.com/photo-1544551763-92ab472cad5f?w=500&auto=format&fit=crop&q=80",
+        "https://media.istockphoto.com/id/1678494315/id/foto/fillet-tuna-mentah-peterseli-dan-rempah-rempah-di-atas-meja-hitam-berbaring-rata-spasi-untuk.jpg?s=612x612&w=0&k=20&c=OmL3eBT3Hb3zzPt3TpwJhBfJPsSg88jm-Uryp0sL-gQ=",
       farmer: "Nelayan Samudera",
       location: "Ambon, ID",
-      trackingCode: generateTrackingCode("tuna-007")
+      trackingCode: generateTrackingCode("tuna-007"),
     },
     {
       id: "cod-008",
       name: "Ikan Kod Segar",
       price: 14.99 * 15000,
       image:
-        "https://images.unsplash.com/photo-1559376767-54104ae6eb97?w=500&auto=format&fit=crop&q=80",
+        "https://media.istockphoto.com/id/837407628/id/foto/ikan-kod.jpg?s=612x612&w=0&k=20&c=SOZ1UECZ3-GuIHlaltB2LmktccS6dHy84v3fFlTTkHU=",
       farmer: "Peternakan Teluk Biru",
       location: "Manado, ID",
-      trackingCode: generateTrackingCode("cod-008")
+      trackingCode: generateTrackingCode("cod-008"),
     },
   ];
 
